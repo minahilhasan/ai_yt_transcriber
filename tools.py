@@ -25,13 +25,12 @@ def urlFinder(user_query):
 def videotranscriber(youtube_url):
     client = genai.Client(api_key=st.secrets["GEMINI"]["GEMINI_API_KEY"])
 
-    # Correct way to pass a YouTube URL directly to Gemini 2.0
     response = client.models.generate_content(
-        model='gemini-2.0-flash', 
+        model='gemini-gemini-2.0-flash-lite', 
         contents=[
             types.Part.from_uri(
                 file_uri=youtube_url,
-                mime_type='video/mp4' # Required metadata
+                mime_type='video/mp4' 
             ),
             types.Part.from_text(text='Please provide a full, word-for-word transcription of this video.')
         ]
